@@ -4,11 +4,13 @@ import com.naadworks.lego.dao.BaseDAO;
 import com.naadworks.lego.entity.BaseEntity;
 import com.naadworks.lego.entry.BaseEntry;
 import com.naadworks.lego.exceptions.BaseException;
+import com.naadworks.lego.exceptions.DaoException;
+import com.naadworks.lego.service.BaseService;
 import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class BaseServiceImpl<T extends BaseEntry, E extends BaseEntity, ID> {
+public abstract class BaseServiceImpl<T extends BaseEntry, E extends BaseEntity, ID> implements BaseService<T, E, ID> {
 
     private static final Logger log = LoggerFactory.getLogger(BaseServiceImpl.class);
 
@@ -23,17 +25,34 @@ public abstract class BaseServiceImpl<T extends BaseEntry, E extends BaseEntity,
     }
 
     public T findById(ID id) throws BaseException {
-        E e = dao.findById(id);
+        E e = null;
+        try {
+            e = dao.findById(id);
+        } catch (DaoException e1) {
+            log.error("error during find by id = ", e1);
+        }
         return convertToEntry(e);
 
     }
 
-    public T create(T baseEntry) throws BaseException {
-        return convertToEntry(dao.save(convertToEntity(baseEntry)));
+    public T create(T t) throws BaseException {
+        E e = null;
+        try {
+            e = dao.create(convertToEntity(t));
+        } catch (DaoException e1) {
+            log.error("error while create = ", e1);
+        }
+        return convertToEntry(e);
     }
 
-    public T update(String id, T entryToUpdate) throws BaseException{
-        return convertToEntry(dao.save(convertToEntity(entryToUpdate)));
+    public T update(ID id, T t) throws BaseException{
+        E e = null;
+        try {
+            e = dao.update(convertToEntity(t), id);
+        } catch (DaoException e1) {
+            log.error("error while update = ",e1);
+        }
+        return convertToEntry(e);
     }
 
     public T convertToEntry(E e) {
