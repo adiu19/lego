@@ -5,7 +5,7 @@ import com.naadworks.lego.controller.BaseController;
 import com.naadworks.lego.entity.BaseEntity;
 import com.naadworks.lego.entry.BaseEntry;
 import com.naadworks.lego.exceptions.BaseException;
-import com.naadworks.lego.service.impl.BaseServiceImpl;
+import com.naadworks.lego.service.BaseService;
 import com.naadworks.lego.view.BaseView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +18,10 @@ import static com.naadworks.lego.enums.StatusType.ERROR;
 import static com.naadworks.lego.enums.StatusType.SUCCESS;
 
 public abstract class BaseControllerImpl<V extends BaseView, T extends BaseEntry, E extends BaseEntity, ID> implements BaseController<T,E,V,ID> {
-    protected Logger LOGGER = LoggerFactory.getLogger(this.getClass().getName());
-    private BaseServiceImpl<T, E, ID> service;
+
+    protected Logger log = LoggerFactory.getLogger(this.getClass().getName());
+
+    private BaseService<T, E, ID> service;
 
     public V findById(ID id) {
         V view = this.createResponse(null);
@@ -60,7 +62,7 @@ public abstract class BaseControllerImpl<V extends BaseView, T extends BaseEntry
         Status status = new Status(SUCCESS, "Operation is successful");
         List<T> data = new ArrayList<>();
         try {
-            T entryUpdate = this.getService().update(id, t);
+            T entryUpdate = this.getService().update(t, id);
             data.add(entryUpdate);
             view = this.createResponse(data);
         }
@@ -72,11 +74,11 @@ public abstract class BaseControllerImpl<V extends BaseView, T extends BaseEntry
 
     }
 
-    public BaseServiceImpl<T, E, ID> getService() {
+    public BaseService<T, E, ID> getService() {
         return service;
     }
 
-    public void setService(BaseServiceImpl<T, E, ID> service) {
+    public void setService(BaseService<T, E, ID> service) {
         this.service = service;
     }
 

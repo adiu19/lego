@@ -46,18 +46,18 @@ public final class QueryParser {
     }
 
     public static Map<String, Map<String, String>> parseQuery(String searchTerms) throws UnsupportedEncodingException {
-        Map<String, Map<String, String>> params = new HashMap();
-        Map<String, String> eqParams = new HashMap();
-        Map<String, String> isNullParams = new HashMap();
-        Map<String, String> isNotNullParams = new HashMap();
-        Map<String, String> neParams = new HashMap();
-        Map<String, String> ltParams = new HashMap();
-        Map<String, String> gtParams = new HashMap();
-        Map<String, String> leParams = new HashMap();
-        Map<String, String> geParams = new HashMap();
-        Map<String, String> likeParams = new HashMap();
-        Map<String, String> inParams = new HashMap();
-        Map<String, String> notInParams = new HashMap();
+        Map<String, Map<String, String>> params = new HashMap<>();
+        Map<String, String> eqParams = new HashMap<>();
+        Map<String, String> isNullParams = new HashMap<>();
+        Map<String, String> isNotNullParams = new HashMap<>();
+        Map<String, String> neParams = new HashMap<>();
+        Map<String, String> ltParams = new HashMap<>();
+        Map<String, String> gtParams = new HashMap<>();
+        Map<String, String> leParams = new HashMap<>();
+        Map<String, String> geParams = new HashMap<>();
+        Map<String, String> likeParams = new HashMap<>();
+        Map<String, String> inParams = new HashMap<>();
+        Map<String, String> notInParams = new HashMap<>();
         if (null != searchTerms && searchTerms.length() > 0) {
             String[] pairs = searchTerms.split("___");
             String[] var14 = pairs;
