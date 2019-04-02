@@ -2,7 +2,7 @@ package com.naadworks.lego.controller.impl;
 
 import com.naadworks.lego.Status;
 import com.naadworks.lego.controller.BaseController;
-import com.naadworks.lego.entity.BaseEntity;
+import com.naadworks.lego.entity.BaseESEntity;
 import com.naadworks.lego.entry.BaseEntry;
 import com.naadworks.lego.exceptions.BaseException;
 import com.naadworks.lego.service.BaseService;
@@ -17,7 +17,7 @@ import java.util.List;
 import static com.naadworks.lego.enums.StatusType.ERROR;
 import static com.naadworks.lego.enums.StatusType.SUCCESS;
 
-public abstract class BaseControllerImpl<V extends BaseView, T extends BaseEntry, E extends BaseEntity, ID> implements BaseController<T,E,V,ID> {
+public abstract class BaseControllerImpl<V extends BaseView, T extends BaseEntry, E extends BaseESEntity, ID> implements BaseController<T,E,V,ID> {
 
     protected Logger log = LoggerFactory.getLogger(this.getClass().getName());
 

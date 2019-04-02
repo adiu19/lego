@@ -14,7 +14,7 @@ import java.util.Set;
 
 import com.naadworks.helpers.ElasticsearchQueryHelper;
 import com.naadworks.lego.dao.ElasticsearchBaseDAO;
-import com.naadworks.lego.entity.BaseEntity;
+import com.naadworks.lego.entity.BaseESEntity;
 import com.naadworks.lego.exceptions.DaoException;
 import com.naadworks.lego.misc.PaginatedList;
 import com.naadworks.lego.misc.QueryParser;
@@ -38,7 +38,7 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilde
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.util.Assert;
 
-public abstract class ElasticsearchBaseDAOImpl<E extends BaseEntity<ID>, ID extends Serializable> implements ElasticsearchBaseDAO<E, ID> {
+public abstract class ElasticsearchBaseDAOImpl<E extends BaseESEntity<ID>, ID extends Serializable> implements ElasticsearchBaseDAO<E, ID> {
 
     protected static final Logger log = LoggerFactory.getLogger(ElasticsearchBaseDAOImpl.class);
 

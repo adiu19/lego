@@ -1,7 +1,7 @@
 package com.naadworks.lego.service.impl;
 
 import com.naadworks.lego.dao.BaseDAO;
-import com.naadworks.lego.entity.BaseEntity;
+import com.naadworks.lego.entity.BaseESEntity;
 import com.naadworks.lego.entry.BaseEntry;
 import com.naadworks.lego.exceptions.BaseException;
 import com.naadworks.lego.exceptions.DaoException;
@@ -10,7 +10,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class BaseServiceImpl<T extends BaseEntry, E extends BaseEntity, ID> implements BaseService<T, E, ID> {
+public abstract class BaseServiceImpl<T extends BaseEntry, E extends BaseESEntity, ID> implements BaseService<T, E, ID> {
 
     private static final Logger log = LoggerFactory.getLogger(BaseServiceImpl.class);
 

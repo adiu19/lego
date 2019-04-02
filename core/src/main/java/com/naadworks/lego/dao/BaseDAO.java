@@ -1,13 +1,13 @@
 package com.naadworks.lego.dao;
 
-import com.naadworks.lego.entity.BaseEntity;
+import com.naadworks.lego.entity.BaseESEntity;
 import com.naadworks.lego.exceptions.DaoException;
 import com.naadworks.lego.misc.PaginatedList;
 
 import java.util.List;
 import java.util.Map;
 
-public interface BaseDAO<E extends BaseEntity, ID> {
+public interface BaseDAO<E extends BaseESEntity, ID> {
 
     E findById(ID id) throws DaoException;
 
