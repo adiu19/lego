@@ -1,11 +1,15 @@
 package com.naadworks.lego.entity;
 
+import org.springframework.data.annotation.Id;
+
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.util.Date;
 
-public abstract class BaseEntity<T> implements Serializable {
-
-    private T id;
+@MappedSuperclass
+public abstract class BaseEntity<ID> implements Serializable {
+    @Id
+    private ID id;
 
     private Date createdOn;
 
@@ -18,7 +22,7 @@ public abstract class BaseEntity<T> implements Serializable {
     public BaseEntity() {
     }
 
-    public BaseEntity(T id, Date createdOn, Date lastModifiedOn, String createdBy, String lastModifiedBy) {
+    public BaseEntity(ID id, Date createdOn, Date lastModifiedOn, String createdBy, String lastModifiedBy) {
         this.id = id;
         this.createdOn = createdOn;
         this.lastModifiedOn = lastModifiedOn;
@@ -26,11 +30,11 @@ public abstract class BaseEntity<T> implements Serializable {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public T getId() {
+    public ID getId() {
         return id;
     }
 
-    public void setId(T id) {
+    public void setId(ID id) {
         this.id = id;
     }
 
@@ -65,5 +69,4 @@ public abstract class BaseEntity<T> implements Serializable {
     public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
     }
-
 }
