@@ -15,6 +15,17 @@ public abstract class BaseEntry<T> implements Serializable {
 
     private String lastModifiedBy;
 
+    public BaseEntry() {
+    }
+
+    public BaseEntry(T id, Date createdOn, Date lastModifiedOn, String createdBy, String lastModifiedBy) {
+        this.id = id;
+        this.createdOn = createdOn;
+        this.lastModifiedOn = lastModifiedOn;
+        this.createdBy = createdBy;
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
     public T getId() {
         return id;
     }

@@ -15,6 +15,17 @@ public abstract class BaseEntity<T> implements Serializable {
 
     private String lastModifiedBy;
 
+    public BaseEntity() {
+    }
+
+    public BaseEntity(T id, Date createdOn, Date lastModifiedOn, String createdBy, String lastModifiedBy) {
+        this.id = id;
+        this.createdOn = createdOn;
+        this.lastModifiedOn = lastModifiedOn;
+        this.createdBy = createdBy;
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
     public T getId() {
         return id;
     }
