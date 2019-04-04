@@ -27,7 +27,7 @@ public abstract class BaseServiceImpl<T extends BaseEntry, E extends BaseESEntit
     public T findById(ID id) throws BaseException {
         E e = null;
         try {
-            e = dao.findById(id);
+            e = getDao().findById(id);
         } catch (DaoException e1) {
             log.error("error during find by id = ", e1);
         }
@@ -38,7 +38,7 @@ public abstract class BaseServiceImpl<T extends BaseEntry, E extends BaseESEntit
     public T create(T t) throws BaseException {
         E e = null;
         try {
-            e = dao.create(convertToEntity(t));
+            e = getDao().create(convertToEntity(t));
         } catch (DaoException e1) {
             log.error("error while create = ", e1);
         }
@@ -48,7 +48,7 @@ public abstract class BaseServiceImpl<T extends BaseEntry, E extends BaseESEntit
     public T update(ID id, T t) throws BaseException{
         E e = null;
         try {
-            e = dao.update(convertToEntity(t), id);
+            e = getDao().update(convertToEntity(t), id);
         } catch (DaoException e1) {
             log.error("error while update = ",e1);
         }

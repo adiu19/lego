@@ -18,7 +18,7 @@ import com.naadworks.lego.entity.BaseESEntity;
 import com.naadworks.lego.exceptions.DaoException;
 import com.naadworks.lego.misc.PaginatedList;
 import com.naadworks.lego.misc.QueryParser;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.sort.SortBuilders;
