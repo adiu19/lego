@@ -45,7 +45,7 @@ public abstract class BaseServiceImpl<T extends BaseEntry, E extends BaseESEntit
         return convertToEntry(e);
     }
 
-    public T update(ID id, T t) throws BaseException{
+    public T update(T t, ID id) throws BaseException{
         E e = null;
         try {
             e = getDao().update(convertToEntity(t), id);
