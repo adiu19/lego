@@ -16,7 +16,7 @@ public interface BaseService <T extends BaseEntry, E extends BaseESEntity, ID> {
 
     T update(T var1, ID var2) throws BaseException;
 
-    PaginatedList<T> query(int var1, int var2, String var3, String var4, String var5) throws BaseException;
+    PaginatedList<T> query(int start, int fetchSize, String sortBy, String sortOrder, String query) throws BaseException;
 
     E convertToEntity(T var1);
 

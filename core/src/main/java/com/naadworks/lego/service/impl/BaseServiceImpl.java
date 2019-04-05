@@ -5,10 +5,14 @@ import com.naadworks.lego.entity.BaseESEntity;
 import com.naadworks.lego.entry.BaseEntry;
 import com.naadworks.lego.exceptions.BaseException;
 import com.naadworks.lego.exceptions.DaoException;
+import com.naadworks.lego.misc.PaginatedList;
 import com.naadworks.lego.service.BaseService;
 import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class BaseServiceImpl<T extends BaseEntry, E extends BaseESEntity, ID> implements BaseService<T, E, ID> {
 
@@ -82,6 +86,29 @@ public abstract class BaseServiceImpl<T extends BaseEntry, E extends BaseESEntit
         }
         return e;
     }
+
+    @Override
+    public PaginatedList<T> query(int start, int fetchSize, String sortBy, String sortOrder, String query) throws BaseException {
+        PaginatedList<T> paginatedEntriesToReturn = new PaginatedList<>();
+        PaginatedList<E> paginatedEntitiesToReturn;
+        try {
+            paginatedEntitiesToReturn = this.getDao().query(start, fetchSize, sortBy, sortOrder, query, null);
+        } catch (DaoException e) {
+            log.error("error while querying ", e);
+            throw new BaseException("Error while Querying");
+        }
+
+        List<T> entriesToReturn = new ArrayList<>();
+        for (E e : paginatedEntitiesToReturn.getResults())
+            entriesToReturn.add(convertToEntry(e));
+
+        paginatedEntriesToReturn.setResults(entriesToReturn);
+        paginatedEntriesToReturn.setPageSize(paginatedEntitiesToReturn.getPageSize());
+        paginatedEntriesToReturn.setStartIndex(paginatedEntitiesToReturn.getStartIndex());
+        paginatedEntriesToReturn.setTotalCount(paginatedEntitiesToReturn.getTotalCount());
+        return paginatedEntriesToReturn;
+    }
+
     public abstract T getEntry();
 
     public abstract E getEntity();

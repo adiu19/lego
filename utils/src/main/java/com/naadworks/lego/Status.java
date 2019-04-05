@@ -8,6 +8,8 @@ public class Status {
 
     private  String message;
 
+    private int totalCount;
+
     public Status() {
     }
 
@@ -32,11 +34,20 @@ public class Status {
         this.message = message;
     }
 
+    public int getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(int totalCount) {
+        this.totalCount = totalCount;
+    }
+
     @Override
     public String toString() {
-        return "temp.Status{" +
+        return "Status{" +
                 "type=" + type +
                 ", message='" + message + '\'' +
+                ", totalCount=" + totalCount +
                 '}';
     }
 }

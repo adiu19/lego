@@ -201,10 +201,6 @@ public abstract class ElasticsearchBaseDAOImpl<E extends BaseESEntity<ID>, ID ex
         return parentId;
     }
 
-    @Override
-    public PaginatedList<E> query(Map<String, Map<String, String>> params, String sortBy, String sortOrder, int start, int fetchSize) throws DaoException {
-        return query(start, fetchSize, sortBy, sortOrder, params, null);
-    }
 
     @Override
     public PaginatedList<E> query(int start, int fetchSize, String sortBy, String sortOrder, Map<String, Map<String, String>> params, Set<String> fields) {

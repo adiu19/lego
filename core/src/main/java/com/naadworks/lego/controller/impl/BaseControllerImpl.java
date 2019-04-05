@@ -5,6 +5,7 @@ import com.naadworks.lego.controller.BaseController;
 import com.naadworks.lego.entity.BaseESEntity;
 import com.naadworks.lego.entry.BaseEntry;
 import com.naadworks.lego.exceptions.BaseException;
+import com.naadworks.lego.misc.PaginatedList;
 import com.naadworks.lego.service.BaseService;
 import com.naadworks.lego.view.BaseView;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static com.naadworks.lego.enums.StatusType.ERROR;
 import static com.naadworks.lego.enums.StatusType.SUCCESS;
@@ -72,6 +74,23 @@ public abstract class BaseControllerImpl<V extends BaseView, T extends BaseEntry
         view.setStatus(status);
         return view;
 
+    }
+
+    @Override
+    public V query(int start, int fetchSize, String sortBy, String sortOrder, String query, Set<String> fields) {
+        V view = this.createResponse(null);
+        Status status = new Status(SUCCESS, "Operation is successful");
+        PaginatedList<T> paginatedList = null;
+        try {
+            paginatedList = this.getService().query(start, fetchSize, sortBy, sortOrder, query);
+            view = this.createResponse(paginatedList.getResults());
+            status.setTotalCount(paginatedList.getTotalCount());
+        }
+        catch(BaseException be) {
+            status.setType(ERROR);
+        }
+        view.setStatus(status);
+        return view;
     }
 
     public BaseService<T, E, ID> getService() {
