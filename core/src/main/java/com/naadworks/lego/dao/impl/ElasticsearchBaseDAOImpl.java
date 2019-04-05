@@ -92,9 +92,12 @@ public abstract class ElasticsearchBaseDAOImpl<E extends BaseESEntity<ID>, ID ex
         query.setObject(entity);
         query.setIndexName(indexName);
         query.setType(docType);
-        if (entity.getId() != null) {
-            query.setId(entity.getId().toString());
-        }
+        query.setId(id.toString());
+
+//        if (entity.getId() != null) {
+//            //query.setId(entity.getId().toString());
+//            query.setId(id.toString());
+//        }
         Field parentField = this.getParentField();
         if (parentField != null) {
             query.setParentId(this.getParentId(entity, parentField));
